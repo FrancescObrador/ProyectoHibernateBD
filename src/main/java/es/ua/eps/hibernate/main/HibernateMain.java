@@ -45,7 +45,6 @@ public class HibernateMain {
         return createdUserIds;
     }
 
-
     public static void CreatePublicInfo(List<Integer> createdUserIds) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
@@ -58,11 +57,12 @@ public class HibernateMain {
             info.setMostrar_email(Math.random() < 0.5);
             info.setMostrar_nacido(Math.random() < 0.5);
             info.setMostrar_nombre(Math.random() < 0.5);
+            session.persist(info);
         }
 
         session.getTransaction().commit();
     }
-    /*
+
     private static void CreateFollowUsers(List<Integer> createdUserIds) {
 
         Random rnd = new Random();
@@ -82,6 +82,8 @@ public class HibernateMain {
                 Usuario fUser = session.get(Usuario.class,idx);
                 followed.add(fUser);
             }
+            curUser.setSeguidos(followed);
+            session.persist(curUser);
         }
 
         session.getTransaction().commit();
@@ -102,12 +104,12 @@ public class HibernateMain {
                 Conexion con = new Conexion();
                 con.setEntra(connectionTime);
                 con.setUsuario(curUser);
+                session.persist(con);
             }
         }
 
         session.getTransaction().commit();
     }
-    */
 
     public static void main(String[] args) {
 
@@ -115,13 +117,13 @@ public class HibernateMain {
         List<Integer> createdUserIds = CreateUsers();
 
         // Create Follow users
-        //CreateFollowUsers(createdUserIds);
+        CreateFollowUsers(createdUserIds);
 
         // Set Public info
-        //CreatePublicInfo(createdUserIds);
+        CreatePublicInfo(createdUserIds);
 
         // Create connections
-        //CreateConnections(createdUserIds);
+        CreateConnections(createdUserIds);
 
         // Terminate session factory, otherwise program won't end
         HibernateUtil.getSessionFactory().close();

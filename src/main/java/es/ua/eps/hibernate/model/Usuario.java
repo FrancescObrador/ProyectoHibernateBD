@@ -2,7 +2,9 @@ package es.ua.eps.hibernate.model;
 
 import jakarta.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="usuario")
@@ -32,8 +34,7 @@ public class Usuario {
     @JoinColumn(name="id_perfil", nullable=false)
     private Perfil perfil;
 
-    @OneToMany
-    @JoinColumn(name="id_usuario")
+    @OneToMany(mappedBy = "usuario")
     private List<Conexion> conexiones;
 
     @Column(name="apodo")
@@ -41,6 +42,18 @@ public class Usuario {
 
     @OneToOne(mappedBy="usuario")
     private InformacionPublica informacionPublica;
+
+    @ManyToMany
+    @JoinTable(name = "sigue",
+            joinColumns = {@JoinColumn(name = "id_seguido", referencedColumnName = "id_usuario")},
+            inverseJoinColumns = {@JoinColumn(name="id_seguidor", referencedColumnName = "id_usuario")})
+    private Set<Usuario> seguidores;
+
+    @ManyToMany
+    @JoinTable(name = "sigue",
+            joinColumns = {@JoinColumn(name = "id_seguidor", referencedColumnName = "id_usuario")},
+            inverseJoinColumns = {@JoinColumn(name="id_seguido", referencedColumnName = "id_usuario")})
+    private Set<Usuario> seguidos;
 
     public int getUsuId(){
         return id;
@@ -104,5 +117,21 @@ public class Usuario {
 
     public void setApodo(String apodo) {
         this.apodo = apodo;
+    }
+
+    public Set<Usuario> getSeguidores() {
+        return seguidores;
+    }
+
+    public void setSeguidores(Set<Usuario> seguidores) {
+        this.seguidores = seguidores;
+    }
+
+    public Set<Usuario> getSeguidos() {
+        return seguidos;
+    }
+
+    public void setSeguidos(Set<Usuario> seguidos) {
+        this.seguidos = seguidos;
     }
 }

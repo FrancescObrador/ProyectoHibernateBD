@@ -5,10 +5,10 @@ import jakarta.persistence.*;
 @Entity
 @Table(name="informacion_publica")
 public class InformacionPublica {
+    //@Id
+    //@Column(name="id_usuario")
+    //private int id;
     @Id
-    @Column(name="id_usuario")
-    private int id;
-
     @OneToOne
     @JoinColumn(name="id_usuario", nullable = false)
     private Usuario usuario;
@@ -19,7 +19,7 @@ public class InformacionPublica {
     @Column(name = "mostrar_nacido")
     private boolean mostrarNacido;
 
-    @Column(name = "mostar_nombre")
+    @Column(name = "mostrar_nombre")
     private boolean mostarNombre;
 
     @Column(name = "valoracion")
