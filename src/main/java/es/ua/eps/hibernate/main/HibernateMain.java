@@ -57,6 +57,10 @@ public class HibernateMain {
             info.setMostrar_email(Math.random() < 0.5);
             info.setMostrar_nacido(Math.random() < 0.5);
             info.setMostrar_nombre(Math.random() < 0.5);
+
+            Random rnd = new Random();
+            info.setValoracion(rnd.nextFloat(0,10));
+
             session.persist(info);
         }
 
