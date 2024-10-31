@@ -20,7 +20,7 @@ public class InformacionPublica {
     private boolean mostrarNacido;
 
     @Column(name = "mostrar_nombre")
-    private boolean mostarNombre;
+    private boolean mostrarNombre;
 
     @Column(name = "valoracion")
     private float valoracion;
@@ -41,7 +41,7 @@ public class InformacionPublica {
         this.mostrarEmail = mostrarEmail;
     }
 
-    public boolean getMostar_nacido() {
+    public boolean getMostrar_nacido() {
         return mostrarNacido;
     }
 
@@ -50,11 +50,11 @@ public class InformacionPublica {
     }
 
     public boolean getMostrar_nombre() {
-        return mostarNombre;
+        return mostrarNombre;
     }
 
     public void setMostrar_nombre(boolean mostrar_nombre) {
-        this.mostarNombre = mostrar_nombre;
+        this.mostrarNombre = mostrar_nombre;
     }
 
     public float getValoracion() {

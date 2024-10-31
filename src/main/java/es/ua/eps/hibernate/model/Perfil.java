@@ -2,6 +2,7 @@ package es.ua.eps.hibernate.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,7 +17,7 @@ public class Perfil {
 
     // Mapped by usa el nombre de variable del otro POJO?
     @OneToMany(mappedBy = "perfil")
-    private List<Usuario> usuarios;
+    private List<Usuario> usuarios = new ArrayList<>();
 
     @Column(name="descripcion")
     private String descripcion;
@@ -35,5 +36,13 @@ public class Perfil {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 }

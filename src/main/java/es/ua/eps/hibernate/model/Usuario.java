@@ -45,15 +45,18 @@ public class Usuario {
 
     @ManyToMany
     @JoinTable(name = "sigue",
-            joinColumns = {@JoinColumn(name = "id_seguido", referencedColumnName = "id_usuario")},
-            inverseJoinColumns = {@JoinColumn(name="id_seguidor", referencedColumnName = "id_usuario")})
-    private Set<Usuario> seguidores;
+            joinColumns = @JoinColumn(name = "id_seguidor"),
+            inverseJoinColumns = @JoinColumn(name="id_seguido"))
+    private Set<Usuario> seguidos = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(name = "sigue",
-            joinColumns = {@JoinColumn(name = "id_seguidor", referencedColumnName = "id_usuario")},
-            inverseJoinColumns = {@JoinColumn(name="id_seguido", referencedColumnName = "id_usuario")})
-    private Set<Usuario> seguidos;
+    /*
+   @ManyToMany
+   @JoinTable(name = "sigue",
+           joinColumns = {@JoinColumn(name = "id_seguido", referencedColumnName = "id_usuario")},
+           inverseJoinColumns = {@JoinColumn(name="id_seguidor", referencedColumnName = "id_usuario")})
+   */
+    @ManyToMany(mappedBy = "seguidos")
+    private Set<Usuario> seguidores = new HashSet<>();
 
     public int getUsuId(){
         return id;
