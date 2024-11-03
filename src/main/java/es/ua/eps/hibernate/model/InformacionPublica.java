@@ -33,7 +33,7 @@ public class InformacionPublica {
         return usuario;
     }
 
-    public boolean getMostrar_email() {
+    public boolean getMostrarEmail() {
         return mostrarEmail;
     }
 
@@ -41,7 +41,7 @@ public class InformacionPublica {
         this.mostrarEmail = mostrarEmail;
     }
 
-    public boolean getMostrar_nacido() {
+    public boolean getMostrarNacido() {
         return mostrarNacido;
     }
 
@@ -49,11 +49,11 @@ public class InformacionPublica {
         this.mostrarNacido = mostrarNacido;
     }
 
-    public boolean getMostrar_nombre() {
+    public boolean getMostrarNombre() {
         return mostrarNombre;
     }
 
-    public void setMostrar_nombre(boolean mostrar_nombre) {
+    public void setMostrarNombre(boolean mostrar_nombre) {
         this.mostrarNombre = mostrar_nombre;
     }
 

@@ -49,12 +49,6 @@ public class Usuario {
             inverseJoinColumns = @JoinColumn(name="id_seguido"))
     private Set<Usuario> seguidos = new HashSet<>();
 
-    /*
-   @ManyToMany
-   @JoinTable(name = "sigue",
-           joinColumns = {@JoinColumn(name = "id_seguido", referencedColumnName = "id_usuario")},
-           inverseJoinColumns = {@JoinColumn(name="id_seguidor", referencedColumnName = "id_usuario")})
-   */
     @ManyToMany(mappedBy = "seguidos")
     private Set<Usuario> seguidores = new HashSet<>();
 

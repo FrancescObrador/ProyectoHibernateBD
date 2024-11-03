@@ -9,7 +9,6 @@ import java.util.Set;
 @Entity
 @Table(name="perfil")
 public class Perfil {
-    // id_perfil, description
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
