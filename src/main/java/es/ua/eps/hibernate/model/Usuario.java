@@ -131,4 +131,12 @@ public class Usuario {
     public void setSeguidos(Set<Usuario> seguidos) {
         this.seguidos = seguidos;
     }
+
+    public List<Conexion> getConexiones() {
+        return conexiones;
+    }
+
+    public void setConexiones(List<Conexion> conexiones) {
+        this.conexiones = conexiones;
+    }
 }

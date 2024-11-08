@@ -29,4 +29,8 @@ public class Conexion implements Serializable {
     public void setEntra(Date momentoEntrada) {
         this.momentoEntrada = momentoEntrada;
     }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
 }
