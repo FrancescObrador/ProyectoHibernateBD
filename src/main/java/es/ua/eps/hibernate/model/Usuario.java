@@ -139,4 +139,13 @@ public class Usuario {
     public void setConexiones(List<Conexion> conexiones) {
         this.conexiones = conexiones;
     }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", perfil=" + perfil +
+                '}';
+    }
 }

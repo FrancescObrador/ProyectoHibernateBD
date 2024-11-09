@@ -6,17 +6,21 @@ import org.hibernate.Session;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 public class Ejercicio2 {
 
-    private static int id = 34991;
+    private static int id = 2001;
+
+    private static void setup(){
+        id = new Random().nextInt(2001, 3000);
+    }
 
     private static void Q8(){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
         System.out.println("---------- Q8 ----------");
-
 
         org.hibernate.query.Query query = session.createQuery(
                 "select Year(c.momentoEntrada) as y, count(c) from Conexion c " +
@@ -52,6 +56,7 @@ public class Ejercicio2 {
     }
 
     public static void main(String[] args) {
+        setup();
         Q8();
         Q9();
     }

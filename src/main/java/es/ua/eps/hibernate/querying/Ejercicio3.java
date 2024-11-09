@@ -10,6 +10,7 @@ import org.hibernate.Session;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 public class Ejercicio3 {
 
@@ -40,11 +41,9 @@ public class Ejercicio3 {
         org.hibernate.query.Query query =
                 session.createQuery("select c.momentoEntrada from Conexion c where c.usuario.perfil.descripcion = 'Premium'");
 
-        List<Date> conexiones = query.list();
+        List<Date> entradas = query.list();
 
-        for(Date conexion : conexiones){
-            System.out.println(conexion);
-        }
+        System.out.println(entradas);
 
         session.getTransaction().commit();
 

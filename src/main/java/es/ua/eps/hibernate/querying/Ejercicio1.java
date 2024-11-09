@@ -13,10 +13,15 @@ import org.hibernate.Session;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 public class Ejercicio1 {
 
-    private static int id = 34991;
+    private static int id = 2001;
+
+    private static void setup(){
+        id = new Random().nextInt(2001, 3000);
+    }
 
     private static void Q1(){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -26,9 +31,8 @@ public class Ejercicio1 {
 
         Usuario usuario = session.get(Usuario.class, id);
         List<Conexion> conexiones = usuario.getConexiones();
-        for(Conexion conexion : conexiones){
-            System.out.println(conexion.getEntra());
-        }
+
+        System.out.println(conexiones);
 
         session.getTransaction().commit();
     }
@@ -44,9 +48,7 @@ public class Ejercicio1 {
                 .setParameter("id", id)
                 .list();
 
-        for(Object entrada : momentoEntradas){
-            System.out.println(entrada.toString());
-        }
+        System.out.println(momentoEntradas);
 
         session.getTransaction().commit();
     }
@@ -59,13 +61,14 @@ public class Ejercicio1 {
 
         // select de todas las conexiones entre el 1965-02-01 y hoy.
         List<Conexion> conexiones = session.createNativeQuery(
-                "SELECT * FROM conexion " +
-                        "WHERE  momento_entrada BETWEEN '1965-02-01' AND GETDATE() ", Conexion.class)
+                "SELECT * FROM conexion c " +
+                        "WHERE c.id_usuario = :id AND momento_entrada BETWEEN '1965-02-01' AND GETDATE() ", Conexion.class)
+                .setParameter("id", id)
                 .list();
 
         for(Conexion conexion : conexiones){
             Usuario usuario = conexion.getUsuario();
-            System.out.println("Nombre: " + usuario.getNombre() + " Apellido: " + usuario.getApellidos() + " Perfil: " + usuario.getPerfil().getDescripcion() + " Conexion: " + conexion.getEntra());
+            System.out.println( usuario.toString() + " Conexion: " + conexion.getEntra());
         }
 
         session.getTransaction().commit();
@@ -83,9 +86,7 @@ public class Ejercicio1 {
 
         List<Date> result = query.list();
 
-        for(Date conexion : result){
-            System.out.println(conexion);
-        }
+        System.out.println(result);
 
 
         session.getTransaction().commit();
@@ -106,9 +107,7 @@ public class Ejercicio1 {
 
         List<Conexion> result = query.list();
 
-        for(Conexion conexion : result){
-            System.out.println(conexion.getEntra());
-        }
+        System.out.println(result);
 
         session.getTransaction().commit();
     }
@@ -162,6 +161,7 @@ public class Ejercicio1 {
     }
 
     public static void main(String[] args) {
+        setup();
         Q1();
         Q2();
         Q3();

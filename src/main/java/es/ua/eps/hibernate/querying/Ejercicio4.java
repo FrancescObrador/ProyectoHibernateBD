@@ -51,7 +51,7 @@ public class Ejercicio4 {
 
     }
     public static void main(String[] args) {
-        //Q13();
+        Q13();
         Q14();
     }
 }
