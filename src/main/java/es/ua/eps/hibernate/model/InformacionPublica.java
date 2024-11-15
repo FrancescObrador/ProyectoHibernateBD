@@ -1,10 +1,16 @@
 package es.ua.eps.hibernate.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import java.io.Serializable;
 
 @Entity
+@Cacheable
+@Cache(usage=CacheConcurrencyStrategy.NONSTRICT_READ_WRITE, region="informacionPublica")
 @Table(name="informacion_publica")
-public class InformacionPublica {
+public class InformacionPublica implements Serializable {
     //@Id
     //@Column(name="id_usuario")
     //private int id;
@@ -53,7 +59,7 @@ public class InformacionPublica {
         return mostrarNombre;
     }
 
-    public void setMostrarNombre(boolean mostrar_nombre) {
+    public void setMostrar_nombre(boolean mostrar_nombre) {
         this.mostrarNombre = mostrar_nombre;
     }
 
