@@ -2,6 +2,8 @@ package es.ua.eps.hibernate.model;
 
 import es.ua.eps.hibernate.util.HibernateUtil;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 import org.hibernate.Session;
 
 import java.io.Serializable;
@@ -26,10 +28,12 @@ public class Conexion implements Serializable {
     @Id
     @ManyToOne
     @JoinColumn(name="id_usuario")
+    //@NotNull(message = "usuario cannot be null")
     private Usuario usuario;
 
     @Id
     @Column(name="momento_entrada")
+    @PastOrPresent(message = "momentoEntrada cannot be in the future")
     private Date momentoEntrada;
 
     public void setUsuario(Usuario usuario) {
