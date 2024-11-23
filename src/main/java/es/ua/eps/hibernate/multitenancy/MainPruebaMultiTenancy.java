@@ -65,6 +65,8 @@ public class MainPruebaMultiTenancy {
         TenantIdentifierResolver.setTenantID("P05user2");
         createdUserIds.clear();
 
+        names = generator.generateNames( 10 );
+
         //Añadimos otros 10 usuarios nuevos
         session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();

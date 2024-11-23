@@ -1,0 +1,12 @@
+Resultado obtenido:
+Al ejecutar el código, se observa que los usuarios registrados para un tenant (P05user2) no son accesibles desde otro tenant (P05user1). En este caso, al buscar usuarios con el nombre "Jimmy" para P05user1, la consulta no devuelve ningun usuario. En cambio al ejecutarlo para P501user2 devuelve 1 Usuario llamado "Jimmy"
+
+Conclusión:
+La implementación de multitenancy asegura el aislamiento de los datos entre los tenants. Cada tenant tiene su propio espacio de datos, y las consultas realizadas desde un tenant no afectan ni acceden a los datos de otros tenants, cumpliendo con los requisitos de separación.
+
+
+Comentario:
+
+Comentario 1: Para hacer esta consulta he cambiado el main añadiendo 10 nombres nuevos a names para que sean diferentes las entradas de las dos bases de datos pues con el main original se repetiran los 10 mismos nombres pero con distintas fechas de nacimiento.
+
+Comentario 2: Para conseguir que funcionara MapMultiTenantConnectionProvider he tenido que inyectar el serviceRegistry a connectionProvider, cosa que no he visto hacer en la documentación oficial ni en la documentación de Baeldung asi que no entiendo si es que no estoy haciendo bien otra parte del código y por eso aquí el connectionProvider se crea incorrectamente.
