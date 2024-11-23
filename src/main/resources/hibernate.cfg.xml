@@ -50,7 +50,7 @@
 
         <property name="hibernate.multiTenancy">DATABASE</property>
         <property name="multi_tenant_connection_provider">
-            es.ua.eps.hibernate.multitenancy.MultiTenantConnectionProvider
+            es.ua.eps.hibernate.multitenancy.MapMultiTenantConnectionProvider
         </property>
         <property name="hibernate.tenant_identifier_resolver">
             es.ua.eps.hibernate.multitenancy.TenantIdentifierResolver

@@ -5,11 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import org.hibernate.dialect.Dialect;
 import org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl;
 import org.hibernate.engine.jdbc.connections.spi.AbstractMultiTenantConnectionProvider;
 import org.hibernate.engine.jdbc.connections.spi.ConnectionProvider;
-import org.hibernate.engine.jdbc.connections.spi.DatabaseConnectionInfo;
 import org.hibernate.internal.util.PropertiesHelper;
 
 public class MapMultiTenantConnectionProvider extends AbstractMultiTenantConnectionProvider<String> {
@@ -27,7 +25,9 @@ public class MapMultiTenantConnectionProvider extends AbstractMultiTenantConnect
         Properties properties = new Properties();
         properties.load(getClass().getResourceAsStream(
                 String.format("/multitenancy-%s.properties", tenantId)));
+
         DriverManagerConnectionProviderImpl connectionProvider = new DriverManagerConnectionProviderImpl();
+        connectionProvider.injectServices();
         connectionProvider.configure(PropertiesHelper.map(properties));
         this.connectionProviderMap.put(tenantId, connectionProvider);
     }
@@ -38,12 +38,8 @@ public class MapMultiTenantConnectionProvider extends AbstractMultiTenantConnect
     }
 
     @Override
-    protected ConnectionProvider selectConnectionProvider(String tenantIdentifier) {
+    protected ConnectionProvider selectConnectionProvider(
+            String tenantIdentifier) {
         return connectionProviderMap.get(tenantIdentifier);
-    }
-
-    @Override
-    public DatabaseConnectionInfo getDatabaseConnectionInfo(Dialect dialect) {
-        return super.getDatabaseConnectionInfo(dialect);
     }
 }
