@@ -10,15 +10,17 @@ import org.hibernate.engine.jdbc.connections.spi.AbstractMultiTenantConnectionPr
 import org.hibernate.engine.jdbc.connections.spi.ConnectionProvider;
 import org.hibernate.internal.util.PropertiesHelper;
 
-public class MapMultiTenantConnectionProvider extends AbstractMultiTenantConnectionProvider<String> {
+public class MultiTenantConnectionProvider extends AbstractMultiTenantConnectionProvider<String> {
 
     private Map<String, ConnectionProvider> connectionProviderMap = new HashMap<String, ConnectionProvider>();
 
-    public MapMultiTenantConnectionProvider() throws IOException {
+    public MultiTenantConnectionProvider() throws IOException {
         //Databases added (they could be read from a configuration file)
-        initConnectionProviderForTenant("default");
-        initConnectionProviderForTenant("UA");
-        initConnectionProviderForTenant("UMH");
+        //initConnectionProviderForTenant("default");
+
+        initConnectionProviderForTenant("P05user1");
+        initConnectionProviderForTenant("P05user2");
+
     }
 
     private void initConnectionProviderForTenant(String tenantId) throws IOException {
@@ -26,9 +28,11 @@ public class MapMultiTenantConnectionProvider extends AbstractMultiTenantConnect
         properties.load(getClass().getResourceAsStream(
                 String.format("/multitenancy-%s.properties", tenantId)));
 
-        DriverManagerConnectionProviderImpl connectionProvider = new DriverManagerConnectionProviderImpl();
-        connectionProvider.injectServices();
-        connectionProvider.configure(PropertiesHelper.map(properties));
+        DriverManagerConnectionProviderImpl connectionProvider =
+                new DriverManagerConnectionProviderImpl();
+        connectionProvider.configure( PropertiesHelper.map(properties) );
+
+
         this.connectionProviderMap.put(tenantId, connectionProvider);
     }
 
